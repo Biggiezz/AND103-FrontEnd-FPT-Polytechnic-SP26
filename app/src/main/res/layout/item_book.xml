@@ -10,56 +10,60 @@
         android:id="@+id/tvId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/color_hint"
+        android:textSize="13sp" />
 
 
     <TextView
-        android:id="@+id/tvUsername"
+        android:id="@+id/tvTenSach"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/color_title"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tvAge"
+        android:id="@+id/tvTacGia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/color_subtitle"
+        android:textSize="15sp" />
 
     <TextView
-        android:id="@+id/tvAdress"
+        android:id="@+id/tvNamXb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp" />
-
-    <ImageView
-        android:id="@+id/imgAvatar"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center" />
+        android:layout_marginBottom="8dp"
+        android:textColor="@color/color_subtitle"
+        android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAdd"
-            android:layout_width="0dp"
+            android:id="@+id/btnUpdate"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/txt_warning"
-            android:text="Add"
+            android:layout_gravity="center"
+            android:layout_marginEnd="32dp"
+            android:text="Cap nhat"
             app:cornerRadius="12dp" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnRemove"
-            android:layout_width="0dp"
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="@color/design_default_color_error"
-            android:text="Remove"
+            android:layout_gravity="center"
+            android:text="Xóa"
             app:cornerRadius="12dp" />
     </LinearLayout>
+
 </LinearLayout>

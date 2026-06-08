@@ -18,13 +18,21 @@
         android:theme="@style/Theme.Buoi1Demo"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name="com.example.ChamLab.HomeBook"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="com.example.lab1.ForgotPassword"
             android:exported="false" />
         <activity
             android:name="com.example.demoRetrofit.DemoRetrofit"
-            android:exported="false">
+            android:exported="false" >
 
         </activity>
         <activity
@@ -32,12 +40,8 @@
             android:exported="false" />
         <activity
             android:name="com.example.lab6.LoginActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.example.lab6.RegisterActivity"
