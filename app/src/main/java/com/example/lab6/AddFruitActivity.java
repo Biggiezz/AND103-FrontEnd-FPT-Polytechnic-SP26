@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -31,7 +32,6 @@ import com.example.lab6.model.Fruit;
 import com.example.lab6.model.Response;
 import com.example.lab6.service.HttpRequest;
 import com.google.android.material.button.MaterialButton;
-import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -49,7 +49,7 @@ import retrofit2.Callback;
 
 public class AddFruitActivity extends AppCompatActivity {
 
-    private TextInputEditText edtName, edtQuantity, edtPrice, edtStatus, edtDescription;
+    private EditText edtName, edtQuantity, edtPrice, edtStatus, edtDescription;
     private MaterialButton btnAdd;
     private Spinner spinner;
     private ImageView imgFruit;
@@ -75,6 +75,7 @@ public class AddFruitActivity extends AppCompatActivity {
         loadDistributor();
         imgFruit.setOnClickListener(v -> chooseImage());
         btnAdd.setOnClickListener(v -> addFruit());
+        updateImageView();
     }
 
     private void initUi() {
@@ -93,14 +94,14 @@ public class AddFruitActivity extends AppCompatActivity {
 
     private void setupImageRecyclerView() {
         imageAdapter = new ImageAdapter(this, images);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false
-        );
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
         rcvImages.setLayoutManager(layoutManager);
         rcvImages.setAdapter(imageAdapter);
     }
 
     private void loadDistributor() {
+        Log.d("API", "Call getListDistributor");
         httpRequest.callAPI().getListDistributor().enqueue(getListDistributor);
     }
 
@@ -153,7 +154,6 @@ public class AddFruitActivity extends AppCompatActivity {
 
         if (name.isEmpty() || quantity.isEmpty() ||
                 price.isEmpty() || status.isEmpty() || description.isEmpty()) {
-
             Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -223,18 +223,22 @@ public class AddFruitActivity extends AppCompatActivity {
         public void onFailure(Call<Response<Fruit>> call, Throwable throwable) {
             Log.d("AddFruitActivity", "addFruit error: " + throwable.getMessage());
             Toast.makeText(AddFruitActivity.this, "Thêm không thành công: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
-            Toast.makeText(AddFruitActivity.this, "Thêm không thành công: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
         }
     };
 
     private void chooseImage() {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+        String permission;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            permission = Manifest.permission.READ_MEDIA_IMAGES;
+        } else {
+            permission = Manifest.permission.READ_EXTERNAL_STORAGE;
+        }
+        if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED) {
             openGallery();
             return;
         } else {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+            ActivityCompat.requestPermissions(this, new String[]{permission}, 1
+            );
         }
     }
 
@@ -264,8 +268,6 @@ public class AddFruitActivity extends AppCompatActivity {
             Toast.makeText(this, "Không lấy được ảnh", Toast.LENGTH_SHORT).show();
             return;
         }
-
-        images.clear();
 
         if (data.getClipData() != null) {
             int count = data.getClipData().getItemCount();
@@ -331,10 +333,6 @@ public class AddFruitActivity extends AppCompatActivity {
 
     private void updateImageView() {
         imageAdapter.setData(images);
-
-        if (!images.isEmpty()) {
-            imgFruit.setImageURI(Uri.fromFile(images.get(0)));
-        }
     }
 
     @Override

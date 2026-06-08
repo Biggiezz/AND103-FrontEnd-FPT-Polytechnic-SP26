@@ -19,12 +19,14 @@ import java.util.ArrayList;
 public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.FruitViewHolder> {
     private final ArrayList<Fruit> list;
     private final Context context;
+    private final OnFruitClickListener listener;
     private static final String BASE_IMAGE_URL = "http://10.0.2.2:3000/";
 
 
-    public FruitAdapter(ArrayList<Fruit> list, Context context) {
+    public FruitAdapter(ArrayList<Fruit> list, Context context, OnFruitClickListener listener) {
         this.list = list;
         this.context = context;
+        this.listener = listener;
     }
 
     public void setData(ArrayList<Fruit> data) {
@@ -52,6 +54,18 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.FruitViewHol
         Glide.with(context)
                 .load(getFirstImageUrl(fruit))
                 .into(holder.image);
+
+        holder.imgEdit.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onUpdate(fruit);
+            }
+        });
+
+        holder.imgDelete.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onDelete(fruit);
+            }
+        });
     }
 
     private String getFirstImageUrl(Fruit fruit) {
@@ -88,16 +102,24 @@ public class FruitAdapter extends RecyclerView.Adapter<FruitAdapter.FruitViewHol
     }
 
     static class FruitViewHolder extends RecyclerView.ViewHolder {
-        ImageView image;
+        ImageView image, imgEdit, imgDelete;
         TextView tvName, tvPrice, tvQuantity, tvDescription;
 
         public FruitViewHolder(@NonNull View itemView) {
             super(itemView);
             image = itemView.findViewById(R.id.imgFruit);
+            imgEdit = itemView.findViewById(R.id.imgEdit);
+            imgDelete = itemView.findViewById(R.id.imgDelete);
             tvName = itemView.findViewById(R.id.tvName);
             tvPrice = itemView.findViewById(R.id.tvPrice);
             tvQuantity = itemView.findViewById(R.id.tvQuantity);
             tvDescription = itemView.findViewById(R.id.tvDescription);
         }
+    }
+
+    public interface OnFruitClickListener {
+        void onUpdate(Fruit fruit);
+
+        void onDelete(Fruit fruit);
     }
 }
