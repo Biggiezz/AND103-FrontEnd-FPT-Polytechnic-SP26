@@ -4,10 +4,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
     <uses-permission
-        android:name="android.permission.READ_MEDIA_IMAGES"/>
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -22,30 +22,41 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name="com.example.ChamLab.HomeBook"
-            android:exported="false" >
-
+            android:name="com.example.lab7.Lab7Activity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.lab7.FruitDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.lab7.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.example.lab7.LoginActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.lab7.AddFruitActivity"
+            android:exported="false" />
+
+        <activity
+            android:name="com.example.ChamLab.HomeBook"
+            android:exported="false" />
         <activity
             android:name="com.example.lab1.ForgotPassword"
             android:exported="false" />
         <activity
             android:name="com.example.demoRetrofit.DemoRetrofit"
-            android:exported="false" >
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name="com.example.lab6.AddFruitActivity"
             android:exported="false" />
         <activity
             android:name="com.example.lab6.LoginActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
         <activity
             android:name="com.example.lab6.RegisterActivity"
             android:exported="false" />

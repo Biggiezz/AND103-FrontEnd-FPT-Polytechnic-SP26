@@ -40,12 +40,12 @@ public class Login extends AppCompatActivity {
             String email = edtEmail.getText().toString().trim();
             String password = edtPassword.getText().toString().trim();
 
-//            if (email.isEmpty() || password.isEmpty()) {
-//                Toast.makeText(MainActivity.this, "Vui long nhap day du thong tin", Toast.LENGTH_SHORT).show();
-//            }
-//            if (password.length() < 6) {
-//                Toast.makeText(MainActivity.this, "Mat khau phai co it nhat 6 ky tu", Toast.LENGTH_SHORT).show();
-//            }
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(Login.this, "Vui long nhap day du thong tin", Toast.LENGTH_SHORT).show();
+            }
+            if (password.length() < 6) {
+                Toast.makeText(Login.this, "Mat khau phai co it nhat 6 ky tu", Toast.LENGTH_SHORT).show();
+            }
 
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
